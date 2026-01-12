@@ -22,7 +22,7 @@ public class TestWrapper {
 		System.out.println("Is Z a letter: "+Character.isLetter('Z'));
 		// while validating the characters
 		System.out.println("Alphabet: "+Character.isAlphabetic('A'));
-		System.out.println("is letter: "+Character.isLetter('\u2170'));
-		System.out.println("is alphabetic: "+Character.isAlphabetic('\u2170'));
+		System.out.println("is letter: "+Character.isLetter('\u2160'));
+		System.out.println("is alphabetic: "+Character.isAlphabetic('\u2160'));
 	}
 }
