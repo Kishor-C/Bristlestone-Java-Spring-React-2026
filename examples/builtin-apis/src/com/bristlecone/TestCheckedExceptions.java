@@ -9,9 +9,10 @@ public class TestCheckedExceptions {
 		try {
 			readFile("aaa.txt");
 		} catch (FileNotFoundException e) {
-			System.err.println("File is not found");
+			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			System.err.println("Read is failed");
+			e.printStackTrace();
 		}
 		System.out.println("main ends..");
 	}
