@@ -1,5 +1,7 @@
 package com.examples;
 
+import java.util.Comparator;
+
 public class Product implements Comparable<Product> {
 	private int id;
 	private String name;
@@ -14,6 +16,30 @@ public class Product implements Comparable<Product> {
 		this.name = name;
 		this.price = price;
 	}
+	// generate hashCode & equals
+	@Override
+	public int hashCode() {
+		return id;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		Product other = (Product)obj;
+		return this.id == other.id;
+	}
+	// nested classes or static class inside the Product
+	public static class SortByPrice implements Comparator<Product> {
+		@Override
+		public int compare(Product o1, Product o2) {
+			return Double.compare(o1.getPrice(), o2.getPrice());
+		}
+	}
+	public static class SortByName implements Comparator<Product> {
+		@Override
+		public int compare(Product o1, Product o2) {
+			return o1.getName().compareTo(o2.getName());
+		}
+	}
+	
 	@Override
 	public int compareTo(Product o) {
 		//return id - o.getId(); 

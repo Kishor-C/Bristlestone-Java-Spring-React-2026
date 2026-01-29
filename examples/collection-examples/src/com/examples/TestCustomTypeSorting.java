@@ -2,6 +2,7 @@ package com.examples;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TestCustomTypeSorting {
@@ -15,8 +16,34 @@ public class TestCustomTypeSorting {
 		products.add(new Product(999, "Cooker", 2000.0));
 		products.add(new Product(111, "Jacket", 2500.0));
 		printProducts(products);
+		System.out.println("***** Natural Sorting ****");
 		Collections.sort(products); // newId - sortedId -> 555, 666, 777
 		printProducts(products);
+
+		System.out.println("***** Custom Sorting by name****");
+		Collections.sort(products, new Product.SortByName());
+		printProducts(products);
+		
+		System.out.println("***** Custom Sorting by price****");
+		Collections.sort(products, new Product.SortByPrice());
+		printProducts(products);
+		
+		// anonymous implementation of Comparator
+		Comparator<Product> compareNameDesc = new Comparator<Product>() {
+			// comparing for descending order
+			@Override
+			public int compare(Product o1, Product o2) {
+				return o2.getName().compareTo(o1.getName());
+			}
+		};
+		System.out.println("***** Custom Sorting by name in desc****");
+		Collections.sort(products, compareNameDesc);
+		printProducts(products);
+		/*
+		 *  create anonymous implementation for price in descending order, 
+		 *  then pass it to the sort & call printProducts
+		 */
+		
 	}
 	public static void printProducts(List<Product> list) {
 		System.out.println("*************List of Products********************");
