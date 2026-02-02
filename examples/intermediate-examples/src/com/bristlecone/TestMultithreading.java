@@ -5,13 +5,15 @@ package com.bristlecone;
  */
 
 class R implements Runnable { 
+	private int ticket = 1;
 	@Override
-	public void run() {
-		// it returns currently running thread that has CPU time
-		Thread t = Thread.currentThread();
-		String name = t.getName(); // name of the thread
-		for(int i = 1; i <= 500; i++) {
-			System.out.println("Run method: "+i+", thread name = "+name);
+	public synchronized void run() {
+		String name = Thread.currentThread().getName();
+		if(ticket >= 1) {
+			System.out.println(name+" got ticket");
+			ticket--;
+		} else {
+			System.out.println(name+" didn't get ticket");
 		}
 	}
 }
