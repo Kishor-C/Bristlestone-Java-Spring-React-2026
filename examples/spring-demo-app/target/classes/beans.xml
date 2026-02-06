@@ -19,4 +19,23 @@
 		<constructor-arg name="password" value="testPassword"></constructor-arg>
 		<constructor-arg name="url" value="testUrl"></constructor-arg>
 	</bean>
+	
+	<bean id = "b4" class = "com.bristelcone.PaymentServices" init-method="initializer" destroy-method="cleanUp">
+		<property name="names">
+			<list>
+				<value>Credit Card</value>
+				<value>Debit Card</value>
+				<value>Debit Card</value>
+				<value>UPI</value>
+			</list>
+		</property>
+		<property name = "platforms">
+			<set>
+				<value>Razorpay</value>
+				<value>Razorpay</value>
+				<value>Paypal</value>
+			</set>
+		</property>
+	</bean>
+	
 </beans>
