@@ -1,10 +1,41 @@
 package com.example;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 public class EmployeeDao {
 	
 	private JdbcTemplate template;
+	
+	/*
+	 * Nested class that will convert ResultSet to Employee object
+	 * 
+	 */
+	public class EmployeeRowMapper implements RowMapper<Employee>{
+		@Override
+		public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getDouble("salary"));
+		}
+	}
+	/*
+	 * a method that takes id and returns employee object or throw exception if null
+	 */
+	public Employee findById(int id) {
+		String queryById = "select * from employee where id = ?";
+		Employee emp = template.queryForObject(queryById, new EmployeeRowMapper(), id);
+		return emp;
+	}
+	/*
+	 * a method that returns all the employee rows in a List<Employee>
+	 */
+	public List<Employee> findAll() {
+		String queryAll = "select * from employee";
+		List<Employee> list = template.query(queryAll, new EmployeeRowMapper());
+		return list;
+	}
 	/*
 	 * Spring supplies JdbcTemplate object using
 	 * the XML configuration file
@@ -33,5 +64,10 @@ public class EmployeeDao {
 		int status = template.update("delete from employee where id = ?", id);
 		return status > 0; // true if > 0 else false
 	}
+	/*
+	 * select query to get a result based on the id
+	 * RowMapper - we can create a nested class to implement RowMapper 
+	 * or we can write lambda expression
+	 */
 	
 }
