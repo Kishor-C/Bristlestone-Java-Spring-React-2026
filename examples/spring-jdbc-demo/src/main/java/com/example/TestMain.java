@@ -26,6 +26,7 @@ public class TestMain {
 					Employee employee = new Employee(id, name, salary);
 					int status = dao.save(employee);
 					System.out.println("Row affected: "+status);
+					break;
 				}
 			case 2 : {
 					System.out.println("Enter id to find an employee");
@@ -36,16 +37,36 @@ public class TestMain {
 					} catch(RuntimeException e) {
 						System.err.println("Employee with an id "+id+" not found");
 					}
+					break;
 				}
 			case 3 : {
 					List<Employee> list = dao.findAll();
 					list.forEach(emp -> System.out.println(emp));
+					break;
 				}
+			// implement case 4 and case 5 as an activity
 			case 4 : {
-				
+					System.out.println("Enter id and salary");
+					int id = Integer.parseInt(scan.nextLine());
+					double salary = Double.parseDouble(scan.nextLine());
+					try { 
+						Employee emp = dao.updateSalaryById(id, salary);
+						System.out.println(emp);
+					} catch(RuntimeException e) {
+						System.err.println(e.getMessage());
+					}
+					break;					
 				}
 			case 5 : {
-				
+					System.out.println("Enter id to delete");
+					int id = Integer.parseInt(scan.nextLine());
+					boolean status = dao.deleteById(id);
+					if(status) {
+						System.out.println("Deleted successfully");
+					} else {
+						System.out.println("Employee is not deleted");
+					}
+					break;
 				}
 			}
 		} while(option != 6);

@@ -23,6 +23,11 @@ public class EmployeeDao {
 	/*
 	 * a method that takes id and returns employee object or throw exception if null
 	 */
+	/*
+	 * select query to get a result based on the id
+	 * RowMapper - we can create a nested class to implement RowMapper 
+	 * or we can write lambda expression
+	 */
 	public Employee findById(int id) {
 		String queryById = "select * from employee where id = ?";
 		Employee emp = template.queryForObject(queryById, new EmployeeRowMapper(), id);
@@ -65,9 +70,16 @@ public class EmployeeDao {
 		return status > 0; // true if > 0 else false
 	}
 	/*
-	 * select query to get a result based on the id
-	 * RowMapper - we can create a nested class to implement RowMapper 
-	 * or we can write lambda expression
+	 * update an employee salary based on id
 	 */
+	public Employee updateSalaryById(int id, double salary) {
+		String updateQuery = "update employee set salary = ? where id = ?";
+		int status = template.update(updateQuery, salary, id);
+		if(status > 0) {
+			return findById(id);
+		} else {
+			throw new RuntimeException("Data is not updated");
+		}
+	}
 	
 }
