@@ -25,8 +25,8 @@
 		<property name="dataSource" ref="ds"></property>
 	</bean>
 	
-	<bean id = "dao" class = "com.example.EmployeeDao">
+	<!-- <bean id = "dao" class = "com.example.EmployeeDao">
 		<property name = "template" ref = "jdbcTemplate" />
-	</bean>
+	</bean> -->
 
 </beans>

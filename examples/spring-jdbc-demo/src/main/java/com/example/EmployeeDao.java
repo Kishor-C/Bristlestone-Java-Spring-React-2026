@@ -1,13 +1,20 @@
 package com.example;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+// default id will be employeeDao
+@Repository("dao") // now the id will be dao
 public class EmployeeDao {
 	
+	@Autowired
 	private JdbcTemplate template;
 	
 	/*
@@ -46,9 +53,9 @@ public class EmployeeDao {
 	 * the XML configuration file
 	 * <property name = "template" ref = "jdbc">
 	 */
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-	}
+//	public void setTemplate(JdbcTemplate template) {
+//		this.template = template;
+//	}
 	/*
 	 * takes employee object having id, name, salary and
 	 * stores it in the employee table
